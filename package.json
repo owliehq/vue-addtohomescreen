@@ -1,0 +1,21 @@
+{
+  "name": "vue-addtohomescreen",
+  "version": "1.0.0",
+  "description": "Add to homescreen shortcut",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "minify": "terser ./index.js --output ./dist/vue-addtohomescreen.min.js --compress --source-map"
+  },
+  "keywords": [
+    "vuejs",
+    "addtohomescreen",
+    "pwa"
+  ],
+  "author": "Jordan Matejicek <jordan@owlie.xyz>",
+  "license": "MIT",
+  "dependencies": {
+    "js-cookie": "^2.2.1"
+  },
+  "devDependencies": {}
+}
