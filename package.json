@@ -1,9 +1,11 @@
 {
   "name": "vue-addtohomescreen",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Add to homescreen shortcut",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ./",
+    "lint:fix": "eslint --ext .js,.vue --ignore-path .gitignore ./ --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "minify": "terser ./index.js --output ./dist/vue-addtohomescreen.min.js --compress --source-map"
   },
@@ -15,7 +17,8 @@
   "author": "Jordan Matejicek <jordan@owlie.xyz>",
   "license": "MIT",
   "dependencies": {
-    "js-cookie": "^2.2.1"
+    "js-cookie": "^2.2.1",
+    "mobile-detect": "^1.4.4"
   },
   "devDependencies": {}
 }

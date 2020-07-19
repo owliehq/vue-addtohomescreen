@@ -1,26 +1,21 @@
 <template>
-  <div
-    :class="[
-      'add-to-homescreen-container',
-      opened ? 'visible' : 'hidden',
-    ]"
-  >
+  <div :class="['add-to-homescreen-container', opened ? 'add-to-homescreen-visible' : 'add-to-homescreen-hidden']">
     <button class="close_btn" @click="close" />
     <div class="flex">
       <div class="icon-container">
         <span
           class="icon"
           :style="{
-            'background-color': options.iconColor,
-            'background-image': 'url(' + options.iconPath + ')',
-            color: options.iconTextColor,
+            'background-color': getOpt('iconColor'),
+            'background-image': 'url(' + getOpt('iconPath') + ')',
+            color: iconTextColor
           }"
-          ><template v-if="!options.iconPath">{{ firstCharTitle }}</template>
+          ><template v-if="!getOpt('iconPath')">{{ firstCharTitle }}</template>
         </span>
       </div>
       <div class="col">
-        <span class="app-title" :style="{ color: options.titleColor }">{{
-          options.title ? options.title : appTitle
+        <span class="app-title" :style="{ color: getOpt('titleColor') }">{{
+          getOpt('title') ? getOpt('title') : appTitle
         }}</span
         ><br />
         <span class="app-url">{{ appUrl }}</span>
@@ -33,11 +28,11 @@
             @click="addTohomescreen"
             class="add-button"
             :style="{
-              color: options.buttonTextColor,
-              'background-color': options.buttonColor,
+              color: getOpt('buttonTextColor'),
+              'background-color': getOpt('buttonColor')
             }"
           >
-            {{ options.buttonText }}
+            {{ localizedString.addToHomescreen }}
           </button>
         </div>
       </div>
@@ -46,54 +41,117 @@
 </template>
 
 <script>
-import { isIos, isStandalone } from "./utils";
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie'
+import MobileDetect from 'mobile-detect'
+import appLang from './i18n/lang'
+import { isStandalone } from './utils'
+const md = new MobileDetect(window.navigator.userAgent)
+
 export default {
-  data() {
-    return {
-      opened: false,
-    };
+  name: 'addToHomescreen',
+  props: {
+    title: {
+      type: String,
+      default: ''
+    },
+    titleColor: {
+      type: String,
+      default: '#000'
+    },
+    iconPath: {
+      type: String,
+      default: ''
+    },
+    iconColor: {
+      type: String,
+      default: '#000'
+    },
+    iconTextColor: {
+      type: String,
+      default: '#fff'
+    },
+    buttonColor: {
+      type: String,
+      default: '#000'
+    },
+    buttonTextColor: {
+      type: String,
+      default: '#fff'
+    },
+    background: {
+      type: String,
+      default: '#fff'
+    },
+    lang: {
+      type: String,
+      default: 'en_GB'
+    }
   },
-  mounted() {
-    const getHomescreenCookie = Cookies.get("addToHomescreen");
-    if (!isStandalone() && !getHomescreenCookie) this.opened = true;
+  data () {
+    return {
+      opened: false
+    }
   },
   computed: {
-    options() {
-      return this.$root.$data;
+    options () {
+      return this.$root.$data
     },
-    appTitle() {
-      return document.title;
+    appTitle () {
+      return document.title
     },
-    appUrl() {
-      return window.location.href;
+    appUrl () {
+      return window.location.href
     },
-    firstCharTitle() {
-      return this.appTitle.substring(0, 1);
+    firstCharTitle () {
+      return this.appTitle.substring(0, 1)
     },
+    localizedString () {
+      if (this.getOpt('lang') && appLang[this.lang]) {
+        return appLang[this.getOpt('lang')]
+      } else {
+        return appLang.en_GB
+      }
+    }
   },
   methods: {
-    close() {
-      this.setCookie();
-      this.opened = false;
+    getOpt (option) {
+      return this.options[option] ? this.options[option] : this[option]
     },
-    addTohomescreen() {
-      if (isIos() && !isStandalone()) {
-        alert(`1. Open Share menu
-2. Tap on "Add to Home Screen" button`);
+    close () {
+      this.setCookie()
+      this.opened = false
+    },
+    addTohomescreen () {
+      if (md.is('iPhone')) {
+        alert(this.localizedString.addMessages.ios)
+      } else if (md.is('AndroidOS')) {
+        if (this.$deferedAndroidAddToHomescreen) {
+          this.$deferedAndroidAddToHomescreen.prompt()
+        } else {
+          alert(this.localizedString.addMessages.android)
+        }
+      } else {
+        // TODO : Add modal with arrow to show where to click on desktop
+        alert(this.localizedString.addMessages.windows)
       }
-      this.setCookie();
-      this.opened = false;
+      this.setCookie()
+      this.opened = false
     },
-    setCookie() {
-      Cookies.set("addToHomescreen", true, { expires: 7 });
-    },
+    setCookie () {
+      Cookies.set('addToHomescreen', true, { expires: 7 })
+    }
   },
-};
+  created () {
+    const getHomescreenCookie = Cookies.get('addToHomescreen')
+    if (!isStandalone() && !getHomescreenCookie) this.opened = true
+  }
+}
 </script>
 
 <style scoped>
 .add-to-homescreen-container {
+  z-index: 10000;
+  border-top: 1px solid #e0e0e0;
   font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   width: 100%;
   box-sizing: border-box;
@@ -106,10 +164,10 @@ export default {
   transition: all 0.5s;
 }
 
-.add-to-homescreen-container.visible {
+.add-to-homescreen-container.add-to-homescreen-visible {
   transform: translateY(0);
 }
-.add-to-homescreen-container.hidden {
+.add-to-homescreen-container.add-to-homescreen-hidden {
   transform: translateY(100%);
 }
 
@@ -160,7 +218,6 @@ export default {
 }
 
 .btn-container {
-  width: 40%;
   float: right;
 }
 
