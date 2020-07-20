@@ -9,12 +9,10 @@ export default {
     const md = new MobileDetect(window.navigator.userAgent)
     const getHomescreenCookie = Cookies.get('addToHomescreen')
     if (!isStandalone() && !getHomescreenCookie) {
-      if (md.is('AndroidOS')) {
-        window.addEventListener('beforeinstallprompt', e => {
-          e.preventDefault()
-          vue.prototype.$deferedAndroidAddToHomescreen = e
-        })
-      }
+      window.addEventListener('beforeinstallprompt', e => {
+        e.preventDefault()
+        vue.prototype.$deferedAddToHomescreen = e
+      })
     }
     Vue.component(addToHomescreen.name, addToHomescreen)
 

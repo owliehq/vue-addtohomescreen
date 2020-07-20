@@ -128,16 +128,13 @@ export default {
       this.opened = false
     },
     addTohomescreen() {
-      if (md.is('iPhone')) {
+      if (this.$deferedAddToHomescreen) {
+        this.$deferedAddToHomescreen.prompt()
+      } else if (md.is('iPhone')) {
         alert(this.localizedString.addMessages.ios)
       } else if (md.is('AndroidOS')) {
-        if (this.$deferedAndroidAddToHomescreen) {
-          this.$deferedAndroidAddToHomescreen.prompt()
-        } else {
-          alert(this.localizedString.addMessages.android)
-        }
+        alert(this.localizedString.addMessages.android)
       } else {
-        // TODO : Add modal with arrow to show where to click on desktop
         alert(this.localizedString.addMessages.windows)
       }
       this.setCookie()
