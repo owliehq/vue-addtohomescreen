@@ -5,7 +5,7 @@ import MobileDetect from 'mobile-detect'
 import Cookies from 'js-cookie'
 
 export default {
-  install (vue, opts) {
+  install(vue, opts) {
     const md = new MobileDetect(window.navigator.userAgent)
     const getHomescreenCookie = Cookies.get('addToHomescreen')
     if (!isStandalone() && !getHomescreenCookie) {
@@ -19,10 +19,10 @@ export default {
     Vue.component(addToHomescreen.name, addToHomescreen)
 
     const addToHomescreenProt = {
-      mount: (opt) => {
+      mount: opt => {
         const root = new Vue({
           data: opt,
-          render: (createElement) => createElement(addToHomescreen)
+          render: createElement => createElement(addToHomescreen)
         })
         root.$mount(document.body.appendChild(document.createElement('div')))
       }

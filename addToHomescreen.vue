@@ -1,5 +1,11 @@
 <template>
-  <div :class="['add-to-homescreen-container', opened ? 'add-to-homescreen-visible' : 'add-to-homescreen-hidden']">
+  <div
+    ref="addtohomescreen"
+    :class="[
+      'add-to-homescreen-container',
+      opened ? 'add-to-homescreen-visible' : 'add-to-homescreen-hidden'
+    ]"
+  >
     <button class="close_btn" @click="close" />
     <div class="flex">
       <div class="icon-container">
@@ -87,25 +93,25 @@ export default {
       default: 'en_GB'
     }
   },
-  data () {
+  data() {
     return {
       opened: false
     }
   },
   computed: {
-    options () {
+    options() {
       return this.$root.$data
     },
-    appTitle () {
+    appTitle() {
       return document.title
     },
-    appUrl () {
+    appUrl() {
       return window.location.href
     },
-    firstCharTitle () {
+    firstCharTitle() {
       return this.appTitle.substring(0, 1)
     },
-    localizedString () {
+    localizedString() {
       if (this.getOpt('lang') && appLang[this.lang]) {
         return appLang[this.getOpt('lang')]
       } else {
@@ -114,14 +120,14 @@ export default {
     }
   },
   methods: {
-    getOpt (option) {
+    getOpt(option) {
       return this.options[option] ? this.options[option] : this[option]
     },
-    close () {
+    close() {
       this.setCookie()
       this.opened = false
     },
-    addTohomescreen () {
+    addTohomescreen() {
       if (md.is('iPhone')) {
         alert(this.localizedString.addMessages.ios)
       } else if (md.is('AndroidOS')) {
@@ -137,13 +143,17 @@ export default {
       this.setCookie()
       this.opened = false
     },
-    setCookie () {
+    setCookie() {
       Cookies.set('addToHomescreen', true, { expires: 7 })
     }
   },
-  created () {
+  created() {
     const getHomescreenCookie = Cookies.get('addToHomescreen')
-    if (!isStandalone() && !getHomescreenCookie) this.opened = true
+    const getHomescreenCalledCookie = Cookies.get('addToHomescreenCalled')
+    if (!isStandalone() && !getHomescreenCookie && !getHomescreenCalledCookie) {
+      this.opened = true
+      Cookies.set('addToHomescreenCalled', true, { expires: 7 })
+    }
   }
 }
 </script>
@@ -178,7 +188,7 @@ export default {
   width: 20px;
   height: 20px;
   border: 0;
-  background: url("assets/x.svg");
+  background: url('assets/x.svg');
 }
 
 .flex {

@@ -17,8 +17,7 @@ export default {
 2. Appuyez sur le bouton "Sur l'écran d'accueil"`,
       android: `1. Ouvrez les paramètres de la page
 2. Appuyez sur le bouton "Ajouter à l'écran d'accueil"`,
-      windows:
-        'Cliquez sur le bouton (+) présent à droite dans votre barre de navigation',
+      windows: 'Cliquez sur le bouton (+) présent à droite dans votre barre de navigation',
       osx: ''
     }
   }
