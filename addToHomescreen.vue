@@ -179,6 +179,7 @@ export default {
 }
 
 .close_btn {
+  cursor: pointer;
   position: absolute;
   top: 15px;
   right: 15px;

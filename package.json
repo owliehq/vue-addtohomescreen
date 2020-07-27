@@ -1,6 +1,6 @@
 {
-  "name": "vue-addtohomescreen",
-  "version": "1.0.3",
+  "name": "@owliehq/vue-addtohomescreen",
+  "version": "1.0.4",
   "description": "Add to homescreen shortcut",
   "main": "index.js",
   "scripts": {
@@ -20,5 +20,13 @@
     "js-cookie": "^2.2.1",
     "mobile-detect": "^1.4.4"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/owliehq/vue-addtohomescreen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/owliehq/vue-addtohomescreen/issues"
+  },
+  "homepage": "https://github.com/owliehq/vue-addtohomescreen#readme"
 }
