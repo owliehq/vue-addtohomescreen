@@ -78,6 +78,6 @@ lang: {
 }
 ```
 
-##Credits
+## Credits
 Made with <3 in Metz, a small town in France by Owlie.
 Feel free to patch / edit / optimize / add features. MR are Welcome.
