@@ -1,5 +1,5 @@
 export const isStandalone = () => {
-  return 'standalone' in window.navigator && window.navigator.standalone
+  return window.matchMedia('(display-mode: standalone)').matches
 }
 /*
 isInWebAppiOS = (window.navigator.standalone == true);

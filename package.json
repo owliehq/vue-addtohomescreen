@@ -1,6 +1,6 @@
 {
-  "name": "@owliehq/vue-addtohomescreen",
-  "version": "1.0.4",
+  "name": "vue-addtohomescreen",
+  "version": "1.0.6",
   "description": "Add to homescreen shortcut",
   "main": "index.js",
   "scripts": {
