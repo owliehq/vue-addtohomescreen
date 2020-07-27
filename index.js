@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import addToHomescreen from './addToHomescreen'
 import { isStandalone } from './utils'
-import MobileDetect from 'mobile-detect'
 import Cookies from 'js-cookie'
 
 export default {
   install(vue, opts) {
-    const md = new MobileDetect(window.navigator.userAgent)
     const getHomescreenCookie = Cookies.get('addToHomescreen')
     if (!isStandalone() && !getHomescreenCookie) {
       window.addEventListener('beforeinstallprompt', e => {

@@ -48,10 +48,9 @@
 
 <script>
 import Cookies from 'js-cookie'
-import MobileDetect from 'mobile-detect'
+import uaParser from 'ua-parser-js'
 import appLang from './i18n/lang'
 import { isStandalone } from './utils'
-const md = new MobileDetect(window.navigator.userAgent)
 
 export default {
   name: 'addToHomescreen',
@@ -128,14 +127,28 @@ export default {
       this.opened = false
     },
     addTohomescreen() {
+      const parsedUa = uaParser(window.navigator)
       if (this.$deferedAddToHomescreen) {
         this.$deferedAddToHomescreen.prompt()
-      } else if (md.is('iPhone')) {
+      } else if (parsedUa.os.name === 'iOS') {
         alert(this.localizedString.addMessages.ios)
-      } else if (md.is('AndroidOS')) {
+      } else if (parsedUa.os.name === 'Android') {
         alert(this.localizedString.addMessages.android)
+      } else if (
+        parsedUa.os.name === 'Windows' &&
+        (parsedUa.browser.name === 'Chrome' || parsedUa.browser.name === 'Edge')
+      ) {
+        alert(this.localizedString.addMessages.windows.chrome)
+      } else if (parsedUa.os.name === 'Windows' && parsedUa.browser.name === 'Firefox') {
+        alert(this.localizedString.addMessages.windows.firefox)
+      } else if (parsedUa.os.name === 'Mac OS' && parsedUa.browser.name === 'Firefox') {
+        alert(this.localizedString.addMessages.macos.firefox)
+      } else if (parsedUa.os.name === 'Mac OS' && parsedUa.browser.name === 'Chrome') {
+        alert(this.localizedString.addMessages.macos.chrome)
+      } else if (parsedUa.os.name === 'Mac OS' && parsedUa.browser.name === 'Safari') {
+        alert(this.localizedString.addMessages.macos.safari)
       } else {
-        alert(this.localizedString.addMessages.windows)
+        alert(this.localizedString.addMessages.others)
       }
       this.setCookie()
       this.opened = false
@@ -145,6 +158,8 @@ export default {
     }
   },
   created() {
+    const parsedUa = uaParser(window.navigator)
+    console.log(parsedUa, 'USER AGENT')
     const getHomescreenCookie = Cookies.get('addToHomescreen')
     const getHomescreenCalledCookie = Cookies.get('addToHomescreenCalled')
     if (!isStandalone() && !getHomescreenCookie && !getHomescreenCalledCookie) {

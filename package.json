@@ -1,7 +1,7 @@
 {
   "name": "@owliehq/vue-addtohomescreen",
-  "version": "1.0.7",
-  "description": "Add to homescreen shortcut",
+  "version": "1.0.8",
+  "description": "Add to homescreen prompt solution for all devices (desktop PC/OSX, IOS, Android).",
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ./",
@@ -18,7 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "js-cookie": "^2.2.1",
-    "mobile-detect": "^1.4.4"
+    "ua-parser-js": "^0.7.21"
   },
   "devDependencies": {},
   "repository": {
