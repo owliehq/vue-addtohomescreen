@@ -1,46 +1,58 @@
 <template>
-  <div
-    ref="addtohomescreen"
-    :class="[
-      'add-to-homescreen-container',
-      opened ? 'add-to-homescreen-visible' : 'add-to-homescreen-hidden'
-    ]"
-  >
-    <button class="close_btn" @click="close" />
-    <div class="flex">
-      <div class="icon-container">
-        <span
-          class="icon"
-          :style="{
-            'background-color': getOpt('iconColor'),
-            'background-image': 'url(' + getOpt('iconPath') + ')',
-            color: iconTextColor
-          }"
-          ><template v-if="!getOpt('iconPath')">{{ firstCharTitle }}</template>
-        </span>
+  <div>
+    <div
+      ref="addtohomescreen"
+      :class="[
+        'add-to-homescreen-container',
+        opened ? 'add-to-homescreen-visible' : 'add-to-homescreen-hidden'
+      ]"
+    >
+      <button class="close_btn" @click="close" />
+      <div class="flex">
+        <div class="icon-container">
+          <span
+            class="icon"
+            :style="{
+              'background-color': getOpt('iconColor'),
+              'background-image': 'url(' + getOpt('iconPath') + ')',
+              color: iconTextColor
+            }"
+            ><template v-if="!getOpt('iconPath')">{{ firstCharTitle }}</template>
+          </span>
+        </div>
+        <div class="col">
+          <span class="app-title" :style="{ color: getOpt('titleColor') }">{{
+            getOpt('title') ? getOpt('title') : appTitle
+          }}</span
+          ><br />
+          <span class="app-url">{{ appUrl }}</span>
+        </div>
       </div>
-      <div class="col">
-        <span class="app-title" :style="{ color: getOpt('titleColor') }">{{
-          getOpt('title') ? getOpt('title') : appTitle
-        }}</span
-        ><br />
-        <span class="app-url">{{ appUrl }}</span>
+      <div class="flex">
+        <div class="col">
+          <div class="btn-container">
+            <button
+              @click="addTohomescreen"
+              class="add-button"
+              :style="{
+                color: getOpt('buttonTextColor'),
+                'background-color': getOpt('buttonColor')
+              }"
+            >
+              {{ localizedString.addToHomescreen }}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="flex">
-      <div class="col">
-        <div class="btn-container">
-          <button
-            @click="addTohomescreen"
-            class="add-button"
-            :style="{
-              color: getOpt('buttonTextColor'),
-              'background-color': getOpt('buttonColor')
-            }"
-          >
-            {{ localizedString.addToHomescreen }}
-          </button>
-        </div>
+    <!-- IOS modal -->
+    <div id="IOSmodal" class="modal add-to-homescreen-visible">
+      <div class="modal-content">
+        <ul>
+          <li>{{localizedString.addMessages.ios1}} <img class="shareIOS" src="./assets/shareios.svg" alt="share IOS"/></li>
+          <li>{{localizedString.addMessages.ios2}}</li>
+        </ul>
+        <button class="closeModal" label="OK" @click="closeModal">OK</button>
       </div>
     </div>
   </div>
@@ -126,12 +138,17 @@ export default {
       this.setCookie()
       this.opened = false
     },
+    closeModal(){
+      document.getElementById("IOSmodal").style.display = "none"
+    },
     addTohomescreen() {
       const parsedUa = uaParser(window.navigator)
+
       if (this.$deferedAddToHomescreen) {
         this.$deferedAddToHomescreen.prompt()
       } else if (parsedUa.os.name === 'iOS') {
-        alert(this.localizedString.addMessages.ios)
+        //Open IOS modal only on IOS device
+        document.getElementById("IOSmodal").style.display = "block"
       } else if (parsedUa.os.name === 'Android') {
         alert(this.localizedString.addMessages.android)
       } else if (
@@ -252,5 +269,53 @@ export default {
   outline: 0;
   font-size: 1rem;
   padding: 5px;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* IOS modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color:white;
+  border-radius:1rem;
+  text-align: center;
+  margin: 50% auto;
+  border: 1px solid #27E9B8;
+  width: 80%;
+}
+
+.modal-content ul {
+  padding: 0;
+  padding-left: 15px;
+  text-align: left;
+  list-style-type: none;
+}
+.shareIOS{
+  width: 20px;
+  vertical-align: top ;
+}
+
+.modal-content .closeModal {
+  color: #27E9B8;
+  background-color: white;
+  border:solid 0.1rem #27E9B8 ;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  margin-bottom: 14px;
 }
 </style>
