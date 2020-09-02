@@ -49,8 +49,11 @@
     <div id="IOSmodal" class="modal add-to-homescreen-visible">
       <div class="modal-content">
         <ul>
-          <li>{{localizedString.addMessages.ios1}} <img class="shareIOS" src="./assets/shareios.svg" alt="share IOS"/></li>
-          <li>{{localizedString.addMessages.ios2}}</li>
+          <li>
+            {{ localizedString.addMessages.ios1 }}
+            <img class="shareIOS" src="./assets/shareios.svg" alt="share IOS" />
+          </li>
+          <li>{{ localizedString.addMessages.ios2 }}</li>
         </ul>
         <button class="closeModal" label="OK" @click="closeModal">OK</button>
       </div>
@@ -138,8 +141,8 @@ export default {
       this.setCookie()
       this.opened = false
     },
-    closeModal(){
-      document.getElementById("IOSmodal").style.display = "none"
+    closeModal() {
+      document.getElementById('IOSmodal').style.display = 'none'
     },
     addTohomescreen() {
       const parsedUa = uaParser(window.navigator)
@@ -148,7 +151,7 @@ export default {
         this.$deferedAddToHomescreen.prompt()
       } else if (parsedUa.os.name === 'iOS') {
         //Open IOS modal only on IOS device
-        document.getElementById("IOSmodal").style.display = "block"
+        document.getElementById('IOSmodal').style.display = 'block'
       } else if (parsedUa.os.name === 'Android') {
         alert(this.localizedString.addMessages.android)
       } else if (
@@ -287,15 +290,15 @@ export default {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-  background-color:white;
-  border-radius:1rem;
+  background-color: white;
+  border-radius: 1rem;
   text-align: center;
   margin: 50% auto;
-  border: 1px solid #27E9B8;
+  border: 1px solid #27e9b8;
   width: 80%;
 }
 
@@ -305,15 +308,15 @@ export default {
   text-align: left;
   list-style-type: none;
 }
-.shareIOS{
+.shareIOS {
   width: 20px;
-  vertical-align: top ;
+  vertical-align: top;
 }
 
 .modal-content .closeModal {
-  color: #27E9B8;
+  color: #27e9b8;
   background-color: white;
-  border:solid 0.1rem #27E9B8 ;
+  border: solid 0.1rem #27e9b8;
   border-radius: 0.3rem;
   font-size: 1rem;
   margin-bottom: 14px;
