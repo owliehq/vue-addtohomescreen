@@ -53,7 +53,10 @@
             {{ localizedString.addMessages.ios1 }}
             <img class="shareIOS" src="./assets/shareios.svg" alt="share IOS" />
           </li>
-          <li>{{ localizedString.addMessages.ios2 }}</li>
+          <li>
+            {{ localizedString.addMessages.ios2 }}
+            <img class="addIOS" src="./assets/addios.svg" alt="add IOS" />
+          </li>
         </ul>
         <button class="closeModal" label="OK" @click="closeModal">OK</button>
       </div>
@@ -309,6 +312,10 @@ export default {
   list-style-type: none;
 }
 .shareIOS {
+  width: 20px;
+  vertical-align: top;
+}
+.addIOS {
   width: 20px;
   vertical-align: top;
 }
