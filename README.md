@@ -44,6 +44,9 @@ title: {
   type: String,
   default: ''
 },
+content: {
+  type: String,
+},
 titleColor: {
   type: String,
   default: '#000'
