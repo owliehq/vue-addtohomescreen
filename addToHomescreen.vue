@@ -25,7 +25,7 @@
             getOpt('title') ? getOpt('title') : appTitle
           }}</span
           ><br />
-          <span class="app-url">{{ content || appUrl }}</span>
+          <span class="app-url" :style="{ color: getOpt('contentColor') }" >{{ getOpt(content) || appUrl }}</span>
         </div>
       </div>
       <div class="flex">
@@ -81,6 +81,10 @@ export default {
       type: String,
     },
     titleColor: {
+      type: String,
+      default: '#000'
+    },
+    contentColor: {
       type: String,
       default: '#000'
     },
