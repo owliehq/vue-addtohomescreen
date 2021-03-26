@@ -25,7 +25,7 @@
             getOpt('title') ? getOpt('title') : appTitle
           }}</span
           ><br />
-          <span class="app-url" :style="{ color: getOpt('contentColor') }" >{{ getOpt(content) || appUrl }}</span>
+          <span class="app-url" :style="{ color: getOpt('contentColor') }" >{{ getOpt('content') || appUrl }}</span>
         </div>
       </div>
       <div class="flex">
