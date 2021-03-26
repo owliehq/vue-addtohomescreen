@@ -25,7 +25,7 @@
             getOpt('title') ? getOpt('title') : appTitle
           }}</span
           ><br />
-          <span class="app-url" :style="{ color: getOpt('contentColor') }" >{{ getOpt('content') || appUrl }}</span>
+          <span class="app-content" :style="{ color: getOpt('contentColor') }" v-html="getOpt('content') || appUrl"></span>
         </div>
       </div>
       <div class="flex">
@@ -115,6 +115,10 @@ export default {
     lang: {
       type: String,
       default: 'en_GB'
+    },
+    expires: {
+      type: Number,
+      default: 8
     }
   },
   data() {
@@ -184,7 +188,7 @@ export default {
       this.opened = false
     },
     setCookie() {
-      Cookies.set('addToHomescreen', true, { expires: 7 })
+      Cookies.set('addToHomescreen', true, { expires: this.expires })
     }
   },
   created() {
@@ -194,7 +198,7 @@ export default {
     const getHomescreenCalledCookie = Cookies.get('addToHomescreenCalled')
     if (!isStandalone() && !getHomescreenCookie && !getHomescreenCalledCookie) {
       this.opened = true
-      Cookies.set('addToHomescreenCalled', true, { expires: 7 })
+      Cookies.set('addToHomescreenCalled', true, { expires: this.expires })
     }
   }
 }
@@ -265,7 +269,7 @@ export default {
   font-size: 1.3rem;
   display: inline-block;
 }
-.app-url {
+.app-content {
   font-size: 0.8rem;
   display: inline-block;
 }

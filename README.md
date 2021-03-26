@@ -93,6 +93,10 @@ background: {
 lang: {
   type: String,
   default: 'en_GB'
+},
+expires: {
+  type: Number,
+  default: 8
 }
 ```
 
