@@ -32,7 +32,7 @@
         <div class="col">
           <div class="btn-container">
             <button
-              @click="addTohomescreen"
+              @click="addToHomescreen"
               class="add-button"
               :style="{
                 color: getOpt('buttonTextColor'),
@@ -158,7 +158,7 @@ export default {
     closeModal() {
       document.getElementById('IOSmodal').style.display = 'none'
     },
-    addTohomescreen() {
+    addToHomescreen() {
       const parsedUa = uaParser(window.navigator)
 
       if (this.$deferedAddToHomescreen) {
@@ -184,19 +184,12 @@ export default {
       } else {
         alert(this.localizedString.addMessages.others)
       }
-      this.setCookie()
       this.opened = false
-    },
-    setCookie() {
-      Cookies.set('addToHomescreen', true, { expires: this.expires })
     }
   },
   created() {
-    const parsedUa = uaParser(window.navigator)
-    console.log(parsedUa, 'USER AGENT')
-    const getHomescreenCookie = Cookies.get('addToHomescreen')
     const getHomescreenCalledCookie = Cookies.get('addToHomescreenCalled')
-    if (!isStandalone() && !getHomescreenCookie && !getHomescreenCalledCookie) {
+    if (!isStandalone() && !getHomescreenCalledCookie) {
       this.opened = true
       Cookies.set('addToHomescreenCalled', true, { expires: this.expires })
     }
