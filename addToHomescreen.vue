@@ -148,6 +148,9 @@ export default {
     }
   },
   methods: {
+    setCookie() {
+      Cookies.set('addToHomescreenCalled', true, { expires: this.getOpt(this.expires) })
+    },
     getOpt(option) {
       return this.options[option] ? this.options[option] : this[option]
     },
@@ -191,7 +194,7 @@ export default {
     const getHomescreenCalledCookie = Cookies.get('addToHomescreenCalled')
     if (!isStandalone() && !getHomescreenCalledCookie) {
       this.opened = true
-      Cookies.set('addToHomescreenCalled', true, { expires: getOpt(this.expires) })
+      this.setCookie()
     }
   }
 }
