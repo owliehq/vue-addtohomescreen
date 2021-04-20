@@ -191,7 +191,7 @@ export default {
     const getHomescreenCalledCookie = Cookies.get('addToHomescreenCalled')
     if (!isStandalone() && !getHomescreenCalledCookie) {
       this.opened = true
-      Cookies.set('addToHomescreenCalled', true, { expires: this.expires })
+      Cookies.set('addToHomescreenCalled', true, { expires: getOpt(this.expires) })
     }
   }
 }

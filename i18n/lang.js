@@ -2,8 +2,8 @@ export default {
   en_GB: {
     addToHomescreen: 'Add to homescreen',
     addMessages: {
-      ios: `1. Open Share menu
-2. Tap on "Add to Home Screen" button`,
+      ios1: `1. Open Share menu`,
+      ios2: `2. Tap on "Add to Home Screen" button`,
       android: `1. Open browser parameters
 2. Tap on "Add to homescreen"`,
       windows: {
