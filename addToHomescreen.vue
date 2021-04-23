@@ -58,7 +58,7 @@
             <img class="addIOS" src="./assets/addios.svg" alt="add IOS" />
           </li>
         </ul>
-        <button class="closeModal" label="OK" @click="closeModal">OK</button>
+        <button class="closeModal" :style="{ color: iconTextColor, background: iconColor, border: '1px solid ' + iconColor }" label="OK" @click="closeModal">OK</button>
       </div>
     </div>
   </div>

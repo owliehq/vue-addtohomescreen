@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import addToHomescreen from './addToHomescreen'
 import { isStandalone } from './utils'
+import Cookies from 'js-cookie'
 
 export default {
   install(vue, opts) {
-    if (!isStandalone()) {
+    if (!isStandalone() || !Cookies.get('addToHomescreenCalled')) {
       window.addEventListener('beforeinstallprompt', e => {
         e.preventDefault()
         vue.prototype.$deferedAddToHomescreen = e
