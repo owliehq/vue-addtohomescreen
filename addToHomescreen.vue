@@ -149,7 +149,9 @@ export default {
   },
   methods: {
     setCookie() {
-      Cookies.set('addToHomescreenCalled', true, { expires: this.getOpt(this.expires) })
+      let exdate = new Date()
+      exdate.setDate(exdate.getDate() + this.expires)
+      Cookies.set('addToHomescreenCalled', true, { expires: this.getOpt(exdate) })
     },
     getOpt(option) {
       return this.options[option] ? this.options[option] : this[option]
@@ -192,6 +194,7 @@ export default {
   },
   created() {
     const getHomescreenCalledCookie = Cookies.get('addToHomescreenCalled')
+    console.log(getHomescreenCalledCookie)
     if (!isStandalone() && !getHomescreenCalledCookie) {
       this.opened = true
       this.setCookie()
