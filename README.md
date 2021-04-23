@@ -8,7 +8,7 @@ You can for example display it after a connection process or when reading an art
 Install it with npm
 
 ```bash
-npm install vue-addtohomescreen
+npm install @owliehq/vue-addtohomescreen
 ```
 
 ## Usage
