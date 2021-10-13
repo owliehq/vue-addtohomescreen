@@ -1,6 +1,6 @@
 {
   "name": "@owliehq/vue-addtohomescreen",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Add to homescreen prompt solution for all devices (desktop PC/OSX, IOS, Android).",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,9 @@
     "js-cookie": "^2.2.1",
     "ua-parser-js": "^0.7.21"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "terser": "^5.9.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/owliehq/vue-addtohomescreen.git"

@@ -7,7 +7,10 @@
         opened ? 'add-to-homescreen-visible' : 'add-to-homescreen-hidden'
       ]"
     >
-      <button class="close_btn" @click="close" />
+      <button
+        class="close_btn"
+        @click="close"
+      />
       <div class="flex">
         <div class="icon-container">
           <span
@@ -17,15 +20,21 @@
               'background-image': 'url(' + getOpt('iconPath') + ')',
               color: iconTextColor
             }"
-            ><template v-if="!getOpt('iconPath')">{{ firstCharTitle }}</template>
+          ><template v-if="!getOpt('iconPath')">{{ firstCharTitle }}</template>
           </span>
         </div>
         <div class="col">
-          <span class="app-title" :style="{ color: getOpt('titleColor') }">{{
+          <span
+            class="app-title"
+            :style="{ color: getOpt('titleColor') }"
+          >{{
             getOpt('title') ? getOpt('title') : appTitle
-          }}</span
-          ><br />
-          <span class="app-content" :style="{ color: getOpt('contentColor') }" v-html="getOpt('content') || appUrl"></span>
+          }}</span><br />
+          <span
+            class="app-content"
+            :style="{ color: getOpt('contentColor') }"
+            v-html="getOpt('content') || appUrl"
+          ></span>
         </div>
       </div>
       <div class="flex">
@@ -46,19 +55,35 @@
       </div>
     </div>
     <!-- IOS modal -->
-    <div id="IOSmodal" class="modal add-to-homescreen-visible">
+    <div
+      id="IOSmodal"
+      class="modal add-to-homescreen-visible"
+    >
       <div class="modal-content">
         <ul>
           <li>
             {{ localizedString.addMessages.ios1 }}
-            <img class="shareIOS" src="./assets/shareios.svg" alt="share IOS" />
+            <img
+              class="shareIOS"
+              src="./assets/shareios.svg"
+              alt="share IOS"
+            />
           </li>
           <li>
             {{ localizedString.addMessages.ios2 }}
-            <img class="addIOS" src="./assets/addios.svg" alt="add IOS" />
+            <img
+              class="addIOS"
+              src="./assets/addios.svg"
+              alt="add IOS"
+            />
           </li>
         </ul>
-        <button class="closeModal" :style="{ color: iconTextColor, background: iconColor, border: '1px solid ' + iconColor }" label="OK" @click="closeModal">OK</button>
+        <button
+          class="closeModal"
+          :style="{ color: iconTextColor, background: iconColor, border: '1px solid ' + iconColor }"
+          label="OK"
+          @click="closeModal"
+        >OK</button>
       </div>
     </div>
   </div>
@@ -121,25 +146,25 @@ export default {
       default: 8
     }
   },
-  data() {
+  data () {
     return {
       opened: false
     }
   },
   computed: {
-    options() {
+    options () {
       return this.$root.$data
     },
-    appTitle() {
+    appTitle () {
       return document.title
     },
-    appUrl() {
+    appUrl () {
       return window.location.href
     },
-    firstCharTitle() {
+    firstCharTitle () {
       return this.appTitle.substring(0, 1)
     },
-    localizedString() {
+    localizedString () {
       if (this.getOpt('lang') && appLang[this.lang]) {
         return appLang[this.getOpt('lang')]
       } else {
@@ -148,22 +173,22 @@ export default {
     }
   },
   methods: {
-    setCookie() {
+    setCookie () {
       let exdate = new Date()
       exdate.setDate(exdate.getDate() + this.expires)
       Cookies.set('addToHomescreenCalled', true, { expires: this.getOpt(exdate) })
     },
-    getOpt(option) {
+    getOpt (option) {
       return this.options[option] ? this.options[option] : this[option]
     },
-    close() {
+    close () {
       this.setCookie()
       this.opened = false
     },
-    closeModal() {
+    closeModal () {
       document.getElementById('IOSmodal').style.display = 'none'
     },
-    addToHomescreen() {
+    addToHomescreen () {
       const parsedUa = uaParser(window.navigator)
 
       if (this.$deferedAddToHomescreen) {
@@ -180,19 +205,31 @@ export default {
         alert(this.localizedString.addMessages.windows.chrome)
       } else if (parsedUa.os.name === 'Windows' && parsedUa.browser.name === 'Firefox') {
         alert(this.localizedString.addMessages.windows.firefox)
-      } else if (parsedUa.os.name === 'Mac OS' && parsedUa.browser.name === 'Firefox') {
-        alert(this.localizedString.addMessages.macos.firefox)
-      } else if (parsedUa.os.name === 'Mac OS' && parsedUa.browser.name === 'Chrome') {
-        alert(this.localizedString.addMessages.macos.chrome)
-      } else if (parsedUa.os.name === 'Mac OS' && parsedUa.browser.name === 'Safari') {
-        alert(this.localizedString.addMessages.macos.safari)
-      } else {
+      } else if (parsedUa.os.name === 'Mac OS') {
+
+        const isTouchDevice = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0))
+
+        if (isTouchDevice) {
+          //Open IOS modal only on IPad device
+          document.getElementById('IOSmodal').style.display = 'block'
+        } else {
+          if (parsedUa.browser.name === 'Firefox') {
+            alert(this.localizedString.addMessages.macos.firefox)
+          } else if (parsedUa.browser.name === 'Chrome') {
+            alert(this.localizedString.addMessages.macos.chrome)
+          } else if (parsedUa.browser.name === 'Safari') {
+            alert(this.localizedString.addMessages.macos.safari)
+          }
+        }
+      }
+
+      else {
         alert(this.localizedString.addMessages.others)
       }
       this.opened = false
     }
   },
-  created() {
+  created () {
     const getHomescreenCalledCookie = Cookies.get('addToHomescreenCalled')
     console.log(getHomescreenCalledCookie)
     if (!isStandalone() && !getHomescreenCalledCookie) {
@@ -234,7 +271,7 @@ export default {
   width: 20px;
   height: 20px;
   border: 0;
-  background: url('assets/x.svg');
+  background: url("assets/x.svg");
 }
 
 .flex {

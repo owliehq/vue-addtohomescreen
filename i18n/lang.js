@@ -31,15 +31,16 @@ export default {
       windows: {
         chrome: 'Cliquez sur le bouton (+) présent à droite dans votre barre de navigation',
         firefox: `1. Redimensionnez votre navigateur pour voir votre bureau
-2. Clickez & glissez l'icône (i) présent à gauche de votre barre de navigation sur votre bureau`
+2. Cliquez & glissez l'icône (i) présent à gauche de votre barre de navigation sur votre bureau`
       },
       macos: {
         chrome: 'Cliquez sur le bouton (+) présent à droite dans votre barre de navigation',
         safari: `1. Redimensionnez votre navigateur pour voir votre bureau
-2. Clickez & glissez l'icône 'terre' présent à gauche de votre barre de navigation sur votre bureau`,
+2. Cliquez & glissez l'icône 'terre' présent à gauche de votre barre de navigation sur votre bureau`,
         firefox: `1. Redimensionnez votre navigateur pour voir votre bureau
-2. Clickez & glissez l'icône (i) présent à gauche de votre barre de navigation sur votre bureau`
-      }
+2. Cliquez & glissez l'icône (i) présent à gauche de votre barre de navigation sur votre bureau`
+      },
+      others: `Il semblerait que votre navigateur ne supporte pas la fonctionnalité d'ajout à la page d'accueil. Mettez-le à jour ou changez de navigateur.`
     }
   }
 }
