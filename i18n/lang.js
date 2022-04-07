@@ -2,7 +2,7 @@ export default {
   en_GB: {
     addToHomescreen: "Add to homescreen",
     addMessages: {
-      ios1: `1. Open Share menu`,
+      ios1: `1. On Safari browser, open Share menu`,
       ios2: `2. Tap on "Add to Home Screen" button`,
       android: `1. Open browser parameters
 2. Tap on "Add to homescreen"`,
@@ -24,7 +24,7 @@ export default {
   fr_FR: {
     addToHomescreen: "Installer l'application",
     addMessages: {
-      ios1: `1. Ouvrir le menu de partage`,
+      ios1: `1. Sur le navigateur Safari, ouvrir le menu de partage`,
       ios2: `2. Appuyez sur le bouton "Sur l'écran d'accueil"`,
       android: `1. Ouvrez les paramètres de la page
 2. Appuyez sur le bouton "Ajouter à l'écran d'accueil"`,
