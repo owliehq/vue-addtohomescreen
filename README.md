@@ -41,7 +41,7 @@ import VueAddtohomescreen from "@owliehq/vue-addtohomescreen";
 Vue.use(VueAddtohomescreen);
 ```
 
-### Vue3 & 2 use
+### Vue 3 & 2 use
 
 Then add the component where you want
 
