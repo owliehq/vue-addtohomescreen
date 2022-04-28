@@ -1,7 +1,7 @@
-import Vue from "vue";
 import addToHomescreen from "./addToHomescreen";
 import { isStandalone } from "./utils";
 import Cookies from "js-cookie";
+import Vue from "vue";
 
 export default {
   install(vue, opts) {
@@ -11,7 +11,7 @@ export default {
         vue.prototype.$deferedAddToHomescreen = e;
       });
     }
-    Vue.component(addToHomescreen.name, addToHomescreen);
+    vue.component(addToHomescreen.name, addToHomescreen);
 
     const addToHomescreenProt = {
       mount: (opt) => {
@@ -22,7 +22,10 @@ export default {
         root.$mount(document.body.appendChild(document.createElement("div")));
       },
     };
-    //
-    vue.prototype.$addToHomescreen = addToHomescreenProt;
+    if (vue.provide) {
+      vue.provide("addToHomescreen", addToHomescreenProt);
+    } else {
+      vue.prototype.$addToHomescreen = addToHomescreenProt;
+    }
   },
 };

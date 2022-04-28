@@ -1,7 +1,7 @@
 {
   "name": "@owliehq/vue-addtohomescreen",
-  "version": "1.3.6",
-  "description": "Add to homescreen prompt solution for all devices (desktop PC/OSX, IOS, Android).",
+  "version": "1.4.0",
+  "description": "Add to homescreen prompt solution for all devices (desktop PC/OSX, IOS, Android). Now Vue3 Compatible.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ./",
