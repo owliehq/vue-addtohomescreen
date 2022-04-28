@@ -7,11 +7,46 @@ You can for example display it after a connection process or when reading an art
 
 Install it with npm
 
+### Vue 3 install
+
+```bash
+npm install @owliehq/vue-addtohomescreen@next
+```
+
+Or Yarn
+
+```bash
+yarn add @owliehq/vue-addtohomescreen@next
+```
+
+### Vue 2 install
+
 ```bash
 npm install @owliehq/vue-addtohomescreen
 ```
 
+Or Yarn
+
+```bash
+yarn add @owliehq/vue-addtohomescreen
+```
+
 ## Usage
+
+### Vue3 init
+
+First, you'll need to initialize the plugin and ask Vue to use it:
+
+```javascript
+import { createApp } from "vue";
+import VueAddtohomescreen from "@owliehq/vue-addtohomescreen";
+
+const app = createApp(App);
+
+app.use(VueAddtohomescreen);
+```
+
+### Vue2 init
 
 First, you'll need to initialize the plugin and ask Vue to use it:
 
@@ -19,6 +54,8 @@ First, you'll need to initialize the plugin and ask Vue to use it:
 import VueAddtohomescreen from "@owliehq/vue-addtohomescreen";
 Vue.use(VueAddtohomescreen);
 ```
+
+### Vue3 & 2 use
 
 Then add the component where you want
 
