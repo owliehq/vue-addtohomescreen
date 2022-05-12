@@ -141,6 +141,7 @@ export default {
   data() {
     return {
       opened: false,
+      localizedString: appLang.en_GB,
     };
   },
   computed: {
@@ -155,13 +156,6 @@ export default {
     },
     firstCharTitle() {
       return this.appTitle.substring(0, 1);
-    },
-    localizedString() {
-      if (this.getOpt("lang") && appLang[this.lang]) {
-        return appLang[this.getOpt("lang")];
-      } else {
-        return appLang.en_GB;
-      }
     },
   },
   methods: {
@@ -231,6 +225,9 @@ export default {
     if (!isStandalone() && !getHomescreenCalledCookie) {
       this.opened = true;
       this.setCookie();
+    }
+    if (this.getOpt("lang") && appLang[this.getOpt("lang")]) {
+      this.localizedString = appLang[this.getOpt("lang")];
     }
   },
 };

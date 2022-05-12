@@ -1,6 +1,6 @@
 {
   "name": "@owliehq/vue-addtohomescreen",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Add to homescreen prompt solution for all devices (desktop PC/OSX, IOS, Android). Now Vue3 Compatible.",
   "main": "index.js",
   "scripts": {
