@@ -56,11 +56,7 @@
         </ul>
         <button
           class="closeModal"
-          :style="{
-            color: getCssOpt('iconTextColor'),
-            background: getCssOpt('iconColor'),
-            border: '1px solid ' + getCssOpt('iconColor'),
-          }"
+          :style="buttonStyle"
           label="OK"
           @click="closeModal"
         >
@@ -73,7 +69,6 @@
 
 <script lang="ts">
 import Cookies from 'js-cookie';
-import UAParser from 'ua-parser-js';
 import { useI18n } from 'vue-i18n';
 
 import {
@@ -83,26 +78,11 @@ import {
   CSSProperties,
   defineComponent,
   onMounted,
-} from 'vue';
+} from 'vue-demi';
 
 import { isStandalone } from './utils';
-
-interface Props {
-  title?: string;
-  content?: string;
-  titleColor?: string;
-  contentColor?: string;
-  iconPath?: string;
-  iconColor?: string;
-  iconTextColor?: string;
-  buttonColor?: string;
-  buttonTextColor?: string;
-  background?: string;
-  lang?: string;
-  expires?: number;
-}
-
-type PropsKeys = keyof Props;
+import { Props, PropsKeys, DeviceInfos } from './types/addToHomescreenOptions';
+import UAParser from 'ua-parser-js';
 
 export default defineComponent({
   name: 'addToHomescreen',
@@ -113,6 +93,10 @@ export default defineComponent({
     const opened = ref(false);
     const options = ref<Props>({});
     options.value = inject('opt') as Props;
+
+    const deferedAddToHomescreen = inject(
+      'deferedAddToHomescreen'
+    ) as BeforeInstallPromptEvent;
 
     const appTitle = computed(() => document.title);
     const appUrl = computed(() => window.location.href);
@@ -184,31 +168,33 @@ export default defineComponent({
     };
 
     const addToHomescreen = () => {
+      const parser = new UAParser();
+      const parsedUa = parser.getResult();
+      const deviceInfos: DeviceInfos = {
+        os: parsedUa.os.name,
+        browser: parsedUa.browser.name,
+      };
+      console.log(deviceInfos, 'DEVICE INFOS');
       const iosElementModal: HTMLElement | null =
         document.getElementById('IOSmodal');
-      const parser = new UAParser('user-agent');
-      const parsedUa = parser.getResult();
-      const deferedAddToHomescreen = inject(
-        'deferedAddToHomescreen'
-      ) as BeforeInstallPromptEvent;
       if (deferedAddToHomescreen) {
         deferedAddToHomescreen.prompt();
-      } else if (parsedUa.os.name === 'iOS') {
+      } else if (deviceInfos.os === 'iOS') {
         //Open IOS modal only on IOS device
         if (iosElementModal) iosElementModal.style.display = 'block';
-      } else if (parsedUa.os.name === 'Android') {
+      } else if (deviceInfos.os === 'Android') {
         alert(t('addMessages.android'));
       } else if (
-        parsedUa.os.name === 'Windows' &&
-        (parsedUa.browser.name === 'Chrome' || parsedUa.browser.name === 'Edge')
+        deviceInfos.os === 'Windows' &&
+        (deviceInfos.browser === 'Chrome' || deviceInfos.browser === 'Edge')
       ) {
         alert(t('addMessages.windows.chrome'));
       } else if (
-        parsedUa.os.name === 'Windows' &&
-        parsedUa.browser.name === 'Firefox'
+        deviceInfos.os === 'Windows' &&
+        deviceInfos.browser === 'Firefox'
       ) {
         alert(t('addMessages.windows.firefox'));
-      } else if (parsedUa.os.name === 'Mac OS') {
+      } else if (deviceInfos.os === 'Mac OS') {
         const isTouchDevice =
           'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
@@ -216,11 +202,11 @@ export default defineComponent({
           //Open IOS modal only on IPad device
           if (iosElementModal) iosElementModal.style.display = 'block';
         } else {
-          if (parsedUa.browser.name === 'Firefox') {
+          if (deviceInfos.browser === 'Firefox') {
             alert(t('addMessages.macos.firefox'));
-          } else if (parsedUa.browser.name === 'Chrome') {
+          } else if (deviceInfos.browser === 'Chrome') {
             alert(t('addMessages.macos.chrome'));
-          } else if (parsedUa.browser.name === 'Safari') {
+          } else if (deviceInfos.browser === 'Safari') {
             alert(t('addMessages.macos.safari'));
           }
         }
@@ -387,11 +373,10 @@ export default defineComponent({
 }
 
 .modal-content .closeModal {
-  color: #27e9b8;
-  background-color: white;
-  border: solid 0.1rem #27e9b8;
-  border-radius: 0.3rem;
+  border: 0;
+  outline: 0;
   font-size: 1rem;
-  margin-bottom: 14px;
+  padding: 5px;
+  margin-bottom: 15px;
 }
 </style>

@@ -4,16 +4,21 @@ import vue from '@vitejs/plugin-vue';
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 import { fileURLToPath } from 'url';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    nodeResolve(),
     vue(),
     VueI18nPlugin({
       include: resolve(dirname(fileURLToPath(import.meta.url)), './src/i18n/*'),
     }),
     cssInjectedByJsPlugin(),
   ],
+  optimizeDeps: {
+    exclude: ['vue-demi'],
+  },
   root: 'src',
   build: {
     outDir: '../dist',

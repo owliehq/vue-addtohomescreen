@@ -1,3 +1,8 @@
+interface DeviceInfos {
+  os?: string;
+  browser?: string;
+}
+
 interface Props {
   title?: string;
   content?: string;
@@ -15,4 +20,4 @@ interface Props {
 
 type PropsKeys = keyof Props;
 
-export { Props, PropsKeys };
+export { Props, PropsKeys, DeviceInfos };
