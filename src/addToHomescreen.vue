@@ -85,9 +85,57 @@ import UAParser from 'ua-parser-js';
 
 export default defineComponent({
   name: 'addToHomescreen',
+  props: {
+    title: {
+      type: String,
+      required: false,
+    },
+    content: {
+      type: String,
+      required: false,
+    },
+    titleColor: {
+      type: String,
+      required: false,
+    },
+    contentColor: {
+      type: String,
+      required: false,
+    },
+    iconPath: {
+      type: String,
+      required: false,
+    },
+    iconColor: {
+      type: String,
+      required: false,
+    },
+    iconTextColor: {
+      type: String,
+      required: false,
+    },
+    buttonColor: {
+      type: String,
+      required: false,
+    },
+    buttonTextColor: {
+      type: String,
+      required: false,
+    },
+    background: {
+      type: String,
+      required: false,
+    },
+    lang: {
+      type: String,
+      required: false,
+    },
+    expires: {
+      type: Number,
+      required: false,
+    },
+  },
   setup(props: Props) {
-    console.log(props, 'PROPS');
-
     const getOpt = (option: PropsKeys): string | number | undefined => {
       const gettedOpt = props ? props[option] : undefined;
       return gettedOpt;
