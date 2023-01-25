@@ -6,7 +6,6 @@
         opened ? 'add-to-homescreen-visible' : 'add-to-homescreen-hidden',
       ]"
     >
-      <button class="close_btn" @click="close" />
       <div class="flex">
         <div class="icon-container">
           <span class="icon" :style="iconStyle"
@@ -40,6 +39,7 @@
           </div>
         </div>
       </div>
+      <button class="close_btn" @click="close" />
     </div>
     <!-- IOS modal -->
     <div id="IOSmodal" class="modal add-to-homescreen-visible">
@@ -69,38 +69,51 @@
 
 <script lang="ts">
 import Cookies from 'js-cookie';
-import { useI18n } from 'vue-i18n';
+import messages from './i18n';
 
 import {
   ref,
   computed,
-  inject,
   CSSProperties,
   defineComponent,
   onMounted,
 } from 'vue-demi';
 
 import { isStandalone } from './utils';
-import { Props, PropsKeys, DeviceInfos } from './types/addToHomescreenOptions';
+import { Props, PropsKeys, DeviceInfos, availableLang } from './types';
 import UAParser from 'ua-parser-js';
 
 export default defineComponent({
   name: 'addToHomescreen',
   setup(props: Props) {
-    const { t } = useI18n({
-      inheritLocale: true,
-    });
-    const opened = ref(false);
-    const options = ref<Props>({});
-    options.value = inject('opt') as Props;
+    console.log(props, 'PROPS');
 
-    const deferedAddToHomescreen = inject(
-      'deferedAddToHomescreen'
-    ) as BeforeInstallPromptEvent;
+    const getOpt = (option: PropsKeys): string | number | undefined => {
+      const gettedOpt = props ? props[option] : undefined;
+      return gettedOpt;
+    };
+
+    const getCssOpt = (option: PropsKeys): string | undefined => {
+      const gettedOpt = props ? props[option] : option;
+      return gettedOpt && typeof gettedOpt === 'string' ? gettedOpt : option;
+    };
+
+    const lang = (getOpt('lang') as availableLang) || 'en_GB';
+    const currentLang = messages[lang];
+
+    const t = (key: string) => {
+      return key.split('.').reduce((o: unknown, i) => {
+        if (o) return o[i as keyof typeof o];
+      }, currentLang);
+    };
+
+    // eslint-disable-next-line no-undef
+    const deferedAddToHomescreen = ref();
 
     const appTitle = computed(() => document.title);
     const appUrl = computed(() => window.location.href);
     const firstCharTitle = computed(() => appTitle.value.substring(0, 1));
+    const opened = ref(false);
 
     const setCookie = () => {
       let exdate = new Date();
@@ -109,16 +122,6 @@ export default defineComponent({
       Cookies.set('addToHomescreenCalled', 'true', {
         expires: exdate,
       });
-    };
-
-    const getOpt = (option: PropsKeys): string | number | undefined => {
-      const gettedOpt = options.value ? options.value[option] : undefined;
-      return gettedOpt;
-    };
-
-    const getCssOpt = (option: PropsKeys): string | undefined => {
-      const gettedOpt = options.value ? options.value[option] : option;
-      return gettedOpt && typeof gettedOpt === 'string' ? gettedOpt : option;
     };
 
     const iconStyle = computed(() => {
@@ -174,11 +177,10 @@ export default defineComponent({
         os: parsedUa.os.name,
         browser: parsedUa.browser.name,
       };
-      console.log(deviceInfos, 'DEVICE INFOS');
       const iosElementModal: HTMLElement | null =
         document.getElementById('IOSmodal');
-      if (deferedAddToHomescreen) {
-        deferedAddToHomescreen.prompt();
+      if (deferedAddToHomescreen.value) {
+        deferedAddToHomescreen.value.prompt();
       } else if (deviceInfos.os === 'iOS') {
         //Open IOS modal only on IOS device
         if (iosElementModal) iosElementModal.style.display = 'block';
@@ -217,7 +219,11 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      console.log('MOUNT');
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferedAddToHomescreen.value = e;
+      });
+
       const getHomescreenCalledCookie = Cookies.get('addToHomescreenCalled');
       if (!isStandalone() && !getHomescreenCalledCookie) {
         opened.value = true;
@@ -243,8 +249,6 @@ export default defineComponent({
 });
 </script>
 
-<i18n src="./i18n/index.json"></i18n>
-
 <style scoped>
 .add-to-homescreen-container {
   z-index: 10000;
@@ -266,6 +270,10 @@ export default defineComponent({
 }
 .add-to-homescreen-container.add-to-homescreen-hidden {
   transform: translateY(100%);
+}
+
+button {
+  cursor: pointer;
 }
 
 .close_btn {

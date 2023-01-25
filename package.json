@@ -30,7 +30,6 @@
     "vue-tsc": "^1.0.24"
   },
   "dependencies": {
-    "@intlify/unplugin-vue-i18n": "^0.8.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "js-cookie": "^3.0.1",
     "ua-parser-js": "^1.0.33",
