@@ -1,7 +1,14 @@
 {
   "name": "@owliehq/vue-addtohomescreen",
   "version": "2.0.0",
-  "description": "Add to homescreen prompt solution for all devices (desktop PC/OSX, IOS, Android). Now Vue3 Compatible.",
+  "description": "Add to homescreen prompt solution for all devices (desktop PC/OSX, IOS, Android). Now Vue3 powered (still vue2 compatible).",
+  "keywords": [
+    "vuejs",
+    "addtohomescreen",
+    "pwa"
+  ],
+  "author": "Jordan Matejicek <jordan@owlie.xyz>",
+  "license": "MIT",
   "main": "dist/vue-addtohomescreen.mjs",
   "scripts": {
     "dev": "vite",
@@ -9,6 +16,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "@types/js-cookie": "^3.0.2",
     "@types/node": "^18.11.18",
     "@types/ua-parser-js": "^0.7.36",
@@ -23,6 +31,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-vue": "^9.8.0",
     "prettier": "^2.8.2",
+    "sass": "^1.57.1",
     "typescript": "*",
     "vite": "^4.0.4",
     "vite-plugin-css-injected-by-js": "^2.4.0",
@@ -30,19 +39,24 @@
     "vue-tsc": "^1.0.24"
   },
   "dependencies": {
-    "@rollup/plugin-node-resolve": "^15.0.1",
     "js-cookie": "^3.0.1",
     "ua-parser-js": "^1.0.33",
-    "vue-demi": "^0.13.11",
-    "vue-i18n": "^9.2.2"
+    "vue-demi": "^0.13.11"
   },
   "peerDependencies": {
-    "@vue/composition-api": "^1.0.0-rc.1",
     "vue": "^2.0.0 || >=3.0.0"
   },
   "peerDependenciesMeta": {
     "@vue/composition-api": {
       "optional": true
     }
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/owliehq/vue-addtohomescreen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/owliehq/vue-addtohomescreen/issues"
+  },
+  "homepage": "https://github.com/owliehq/vue-addtohomescreen#readme"
 }

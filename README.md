@@ -29,7 +29,9 @@ import VueAddtohomescreen from '@owliehq/vue-addtohomescreen';
 
 const app = createApp(App);
 
-app.use(VueAddtohomescreen);
+app.use(VueAddtohomescreen, {
+  // Specify Options here
+});
 ```
 
 ### Vue 2 init

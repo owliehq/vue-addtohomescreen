@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="add-to-homescreen-plugin-container">
     <div
       :class="[
         'add-to-homescreen-container',
@@ -80,7 +80,7 @@ import {
 } from 'vue-demi';
 
 import { isStandalone } from './utils';
-import { Props, PropsKeys, DeviceInfos, availableLang } from './types';
+import { PropsKeys, DeviceInfos, availableLang } from './types';
 import UAParser from 'ua-parser-js';
 
 export default defineComponent({
@@ -135,7 +135,7 @@ export default defineComponent({
       required: false,
     },
   },
-  setup(props: Props) {
+  setup(props) {
     const getOpt = (option: PropsKeys): string | number | undefined => {
       const gettedOpt = props ? props[option] : undefined;
       return gettedOpt;
@@ -155,7 +155,6 @@ export default defineComponent({
       }, currentLang);
     };
 
-    // eslint-disable-next-line no-undef
     const deferedAddToHomescreen = ref();
 
     const appTitle = computed(() => document.title);
@@ -297,142 +296,143 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-.add-to-homescreen-container {
-  z-index: 10000;
-  border-top: 1px solid #e0e0e0;
-  font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-  width: 100%;
-  box-sizing: border-box;
-  background: white;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  padding: 16px;
-  align-items: center;
-  transition: all 0.5s;
-}
+<style lang="scss">
+.add-to-homescreen-plugin-container {
+  .add-to-homescreen-container {
+    z-index: 10000;
+    border-top: 1px solid #e0e0e0;
+    font-family: -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+    background: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 16px;
+    align-items: center;
+    transition: all 0.5s;
 
-.add-to-homescreen-container.add-to-homescreen-visible {
-  transform: translateY(0);
-}
-.add-to-homescreen-container.add-to-homescreen-hidden {
-  transform: translateY(100%);
-}
+    &.add-to-homescreen-visible {
+      transform: translateY(0);
+    }
+    &.add-to-homescreen-hidden {
+      transform: translateY(100%);
+    }
+  }
+  button {
+    cursor: pointer;
+  }
 
-button {
-  cursor: pointer;
-}
+  .close_btn {
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    border: 0;
+    background: url('assets/x.svg');
+  }
 
-.close_btn {
-  cursor: pointer;
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 20px;
-  height: 20px;
-  border: 0;
-  background: url('assets/x.svg');
-}
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-.flex {
-  display: flex;
-  flex-wrap: wrap;
-}
+  .col {
+    flex: 1;
+  }
 
-.col {
-  flex: 1;
-}
+  .icon {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 
-.icon {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+  .icon-container .icon {
+    width: 60px;
+    height: 60px;
+    display: block;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 30px;
+    font-size: 1.3rem;
+    margin-right: 15px;
+    text-transform: uppercase;
+  }
 
-.icon-container .icon {
-  width: 60px;
-  height: 60px;
-  display: block;
-  line-height: 60px;
-  text-align: center;
-  border-radius: 30px;
-  font-size: 1.3rem;
-  margin-right: 15px;
-  text-transform: uppercase;
-}
+  .app-title {
+    font-size: 1.3rem;
+    display: inline-block;
+  }
+  .app-content {
+    font-size: 0.8rem;
+    display: inline-block;
+  }
 
-.app-title {
-  font-size: 1.3rem;
-  display: inline-block;
-}
-.app-content {
-  font-size: 0.8rem;
-  display: inline-block;
-}
+  .btn-container {
+    float: right;
+  }
 
-.btn-container {
-  float: right;
-}
+  .add-button,
+  .add-button:hover,
+  .add-button:visited {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    font-size: 1rem;
+    padding: 5px;
+  }
 
-.add-button,
-.add-button:hover,
-.add-button:visited {
-  width: 100%;
-  border: 0;
-  outline: 0;
-  font-size: 1rem;
-  padding: 5px;
-}
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
+  /* IOS modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 
-/* IOS modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 10000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-}
+  .modal-content {
+    background-color: white;
+    border-radius: 1rem;
+    text-align: center;
+    margin: 50% auto;
+    border: 1px solid #27e9b8;
+    width: 80%;
+  }
 
-.modal-content {
-  background-color: white;
-  border-radius: 1rem;
-  text-align: center;
-  margin: 50% auto;
-  border: 1px solid #27e9b8;
-  width: 80%;
-}
+  .modal-content ul {
+    padding: 0;
+    padding-left: 15px;
+    text-align: left;
+    list-style-type: none;
+  }
+  .shareIOS {
+    width: 20px;
+    vertical-align: top;
+  }
+  .addIOS {
+    width: 20px;
+    vertical-align: top;
+  }
 
-.modal-content ul {
-  padding: 0;
-  padding-left: 15px;
-  text-align: left;
-  list-style-type: none;
-}
-.shareIOS {
-  width: 20px;
-  vertical-align: top;
-}
-.addIOS {
-  width: 20px;
-  vertical-align: top;
-}
-
-.modal-content .closeModal {
-  border: 0;
-  outline: 0;
-  font-size: 1rem;
-  padding: 5px;
-  margin-bottom: 15px;
+  .modal-content .closeModal {
+    border: 0;
+    outline: 0;
+    font-size: 1rem;
+    padding: 5px;
+    margin-bottom: 15px;
+  }
 }
 </style>
