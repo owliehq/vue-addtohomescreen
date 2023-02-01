@@ -3,18 +3,20 @@
 Vue-addtohomescreen is a plugin allowing you to trigger a box asking the user if he wants to install the PWA version of your website at the place you want.
 You can for example display it after a connection process or when reading an article.
 
+**_For Vue 3 check master branch !_**
+
 ## Installation
 
 Install it with npm
 
 ```bash
-npm install @owliehq/vue-addtohomescreen
+npm install @owliehq/vue-addtohomescreen@legacy
 ```
 
 Or Yarn
 
 ```bash
-yarn add @owliehq/vue-addtohomescreen
+yarn add @owliehq/vue-addtohomescreen@legacy
 ```
 
 ## Usage
