@@ -11,13 +11,13 @@ You can for example display it after a connection process or when reading an art
 Install it with npm
 
 ```bash
-npm install @owliehq/vue-addtohomescreen@legacy
+npm install @owliehq/vue-addtohomescreen
 ```
 
 Or Yarn
 
 ```bash
-yarn add @owliehq/vue-addtohomescreen@legacy
+yarn add @owliehq/vue-addtohomescreen
 ```
 
 ## Usage
