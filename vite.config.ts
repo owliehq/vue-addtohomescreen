@@ -2,15 +2,11 @@ import { defineConfig } from 'vite';
 import { dirname, resolve } from 'path';
 import vue from '@vitejs/plugin-vue';
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
-import { fileURLToPath } from 'url';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [nodeResolve(), vue(), cssInjectedByJsPlugin()],
-  optimizeDeps: {
-    exclude: ['vue-demi'],
-  },
   root: 'src',
   build: {
     outDir: '../dist',

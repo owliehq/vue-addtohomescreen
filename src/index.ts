@@ -1,8 +1,7 @@
 import AddToHomescreenComponent from './addToHomescreen.vue';
 import isStandalone from './utils/isStandalone';
 import Cookies from 'js-cookie';
-import { h, render } from 'vue-demi';
-import type { App, Plugin } from 'vue-demi';
+import { h, render, App, Plugin } from 'vue';
 import { Props } from './types';
 
 function useAddToHomescreen(opts: Props) {

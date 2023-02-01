@@ -71,13 +71,7 @@
 import Cookies from 'js-cookie';
 import messages from './i18n';
 
-import {
-  ref,
-  computed,
-  CSSProperties,
-  defineComponent,
-  onMounted,
-} from 'vue-demi';
+import { ref, computed, CSSProperties, defineComponent, onMounted } from 'vue';
 
 import { isStandalone } from './utils';
 import { PropsKeys, DeviceInfos, availableLang } from './types';

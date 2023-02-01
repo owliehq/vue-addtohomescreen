@@ -1,12 +1,13 @@
 <template>
-  <div id="app">
+  <div>
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
 
 <script>
-// import VueAddToHomescreen from '../../../dist/vue-addtohomescreen.mjs';
+import { useAddToHomescreen } from '../../dist/vue-addtohomescreen';
+
 import HelloWorld from './components/HelloWorld.vue';
 
 export default {
@@ -14,8 +15,8 @@ export default {
   components: {
     HelloWorld,
   },
-  mounted() {
-    // VueAddToHomescreen({ buttonColor: 'red' });
+  setup() {
+    useAddToHomescreen({ buttonColor: 'red' });
   },
 };
 </script>

@@ -40,16 +40,7 @@
   },
   "dependencies": {
     "js-cookie": "^3.0.1",
-    "ua-parser-js": "^1.0.33",
-    "vue-demi": "^0.13.11"
-  },
-  "peerDependencies": {
-    "vue": "^2.0.0 || >=3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    }
+    "ua-parser-js": "^1.0.33"
   },
   "repository": {
     "type": "git",
