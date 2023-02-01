@@ -14,10 +14,10 @@ function useAddToHomescreen(opts: Props) {
   }
 }
 
-export const install: Plugin = {
+const install: Plugin = {
   install(app: App, opts: Props) {
     useAddToHomescreen(opts);
   },
 };
-
+export default install;
 export { useAddToHomescreen };

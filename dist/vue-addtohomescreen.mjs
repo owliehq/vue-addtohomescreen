@@ -1453,6 +1453,6 @@ const ci = {
   }
 };
 export {
-  ci as install,
+  ci as default,
   si as useAddToHomescreen
 };
