@@ -58,7 +58,7 @@ export default {
 };
 ```
 
-## Parameters list (hope parameters name are explicit enough; for lang, only en_GB, fr_FR & ru_RU available for now, feel free to translate & MR :))
+## Parameters list ##
 
 ```javascript
 title: {
@@ -102,7 +102,7 @@ background: {
 },
 lang: {
 	type: String,
-	default: 'en_GB'
+	default: 'en_GB' // See Available lang
 },
 expires: {
 	type: Number,
@@ -110,6 +110,20 @@ expires: {
 }
 
 ```
+
+## Available languages
+
+en_GB: English
+fr_FR: French
+ru_RU: Russian
+de_DE: German
+es_ES: Spanish
+pt_PT: Portuguese
+nl_NL: Dutch
+pl_PL: Polish
+ja_JP: Japanese
+zh_CN: Chinese
+
 
 ## Credits
 
