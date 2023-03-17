@@ -58,7 +58,7 @@ export default {
 };
 ```
 
-## Parameters list ##
+## Parameters list
 
 ```javascript
 title: {
@@ -113,17 +113,16 @@ expires: {
 
 ## Available languages
 
-en_GB: English
-fr_FR: French
-ru_RU: Russian
-de_DE: German
-es_ES: Spanish
-pt_PT: Portuguese
-nl_NL: Dutch
-pl_PL: Polish
-ja_JP: Japanese
+en_GB: English\
+fr_FR: French\
+ru_RU: Russian\
+de_DE: German\
+es_ES: Spanish\
+pt_PT: Portuguese\
+nl_NL: Dutch\
+pl_PL: Polish\
+ja_JP: Japanese\
 zh_CN: Chinese
-
 
 ## Credits
 
