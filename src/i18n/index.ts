@@ -231,4 +231,27 @@ export default {
         '看起来您的浏览器不支持原生添加到主屏幕功能。请随时更新/更换浏览器。',
     },
   },
+  id_ID: {
+    addToHomescreen: 'Pasang Aplikasi',
+    addMessages: {
+      ios1: '1. Pada peramban Safari, klik tombol "Bagikan',
+      ios2: '2. Pilih opsi "Tambahkan ke Layar Beranda"',
+      android: `1. Buka menu peramban
+2. Pilih opsi "Tambahkan ke Layar Beranda"`,
+      windows: {
+        chrome: 'Klik tombol (+) di sebelah kanan navigation bar.',
+        firefox: `1. Ubah ukuran jendela peramban hingga desktop Anda terlihat
+2. Seret dan lepas tombol (i) di sebelah kiri navigation bar ke desktop Anda`,
+      },
+      macos: {
+        chrome: 'Klik tombol (+) di sebelah kanan navigation bar.',
+        safari: `1. Ubah ukuran jendela peramban hingga desktop Anda terlihat
+2. Seret & lepas ikon bumi di kiri bilah notifikasi ke desktop Anda`,
+        firefox: `1. Ubah ukuran jendela peramban hingga desktop Anda terlihat
+2. Seret dan lepas tombol (i) di sebelah kiri navigation bar ke desktop Anda`,
+      },
+      others:
+        "Sepertinya browser Anda tidak mendukung penambahan ke layar beranda. Jangan ragu untuk memperbarui/mengubah browser Anda.",
+    },
+  },
 };
