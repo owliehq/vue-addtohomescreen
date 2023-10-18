@@ -122,7 +122,8 @@ pt_PT: Portuguese\
 nl_NL: Dutch\
 pl_PL: Polish\
 ja_JP: Japanese\
-zh_CN: Chinese
+zh_CN: Chinese\
+id_ID: Indonesian
 
 ## Credits
 
