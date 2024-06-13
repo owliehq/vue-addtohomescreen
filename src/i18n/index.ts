@@ -71,12 +71,12 @@ export default {
     },
   },
   de_DE: {
-    addToHomescreen: 'Zum Startbildschirm hinzufügen',
+    addToHomescreen: 'Zum Home-Bildschrim hinzufügen',
     addMessages: {
       ios1: '1. Öffnen Sie im Safari-Browser das Teilen-Menü',
-      ios2: '2. Tippen Sie auf die Schaltfläche "Zum Startbildschirm hinzufügen"',
+      ios2: '2. Tippen Sie auf die Schaltfläche "Zum Home-Bildschrim hinzufügen"',
       android: `1. Öffnen Sie die Browsereinstellungen
-2. Tippen Sie auf "Zum Startbildschirm hinzufügen"`,
+2. Tippen Sie auf "Zum Home-Bildschrim hinzufügen"`,
       windows: {
         chrome: 'Klicken Sie auf die (+) Schaltfläche rechts neben Ihrer Navigationsleiste.',
         firefox: `1. Ändern Sie die Größe Ihres Browsers, sodass Sie Ihren Desktop sehen können
@@ -90,7 +90,7 @@ export default {
 2. Ziehen Sie die (i)-Schaltfläche links von der Navigationsleiste auf Ihren Desktop`,
       },
       others:
-        'Es scheint, dass Ihr Browser das Hinzufügen zum Startbildschirm nicht nativ unterstützt. Fühlen Sie sich frei, Ihren Browser zu aktualisieren/zu wechseln.',
+        'Es scheint, dass Ihr Browser das Hinzufügen zum Home-Bildschrim nicht nativ unterstützt. Fühlen Sie sich frei, Ihren Browser zu aktualisieren/zu wechseln.',
     },
   },
   es_ES: {
